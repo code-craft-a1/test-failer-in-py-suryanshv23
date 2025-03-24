@@ -38,7 +38,7 @@ def testHighPrecipitation():
     assert(len(weather) > 0);
 
 
-def main():
+if __name__ == '__main__':
     testRainy()
     testHighPrecipitation()
-    print("All is well (maybe)\n");
+    print("All is well (maybe!)");
