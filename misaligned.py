@@ -15,3 +15,10 @@ def print_color_map(major_colors, minor_colors):
             print(f'{calc_index(i, j, len(minor_colors))} | {major} | {minor}')
     return len(major_colors) * len(minor_colors)
 
+major_colors, minor_colors = get_colors()
+result = print_color_map(major_colors, minor_colors)
+assert(major_colors == ["White", "Red", "Black", "Yellow", "Violet"])
+assert(minor_colors == ["Blue", "Orange", "Green", "Brown", "Slate"])
+assert(calc_index(1, 2, 3) == 5)
+assert(result == 25)
+print("All is well (maybe!)")
