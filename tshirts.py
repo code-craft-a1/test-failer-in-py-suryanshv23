@@ -8,9 +8,7 @@ def size(cms):
         return 'L'
 
 assert(size(0) == 'S')
-assert(size(37.9) == 'M')
-
-assert(size(38) == 'S')
+assert(size(37.9) == 'S')
 
 # Exact boundary values
 assert(size(38) == 'M')  # previously failed
