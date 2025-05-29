@@ -1,5 +1,4 @@
 
-
 def sensorStub():
     return {
         'temperatureInC': 50,
@@ -8,37 +7,76 @@ def sensorStub():
         'windSpeedKMPH': 52
     }
 
-
 def report(sensorReader):
     readings = sensorReader()
     weather = "Sunny Day"
 
-    if (readings['temperatureInC'] > 25):
-        if readings['precipitation'] >= 20 and readings['precipitation'] < 60:
+    if readings['temperatureInC'] > 25:
+        if readings['precipitation'] >= 60:
+            weather = "Rainy Day"
+        elif readings['precipitation'] >= 20:
             weather = "Partly Cloudy"
-        elif readings['windSpeedKMPH'] > 50:
+        if readings['windSpeedKMPH'] > 50:
             weather = "Alert, Stormy with heavy rain"
     return weather
 
 
+
+def stubRainy():
+    return {
+        'temperatureInC': 30,
+        'precipitation': 70,
+        'humidity': 80,
+        'windSpeedKMPH': 30
+    }
+
+def stubStormy():
+    return {
+        'temperatureInC': 35,
+        'precipitation': 55,
+        'humidity': 70,
+        'windSpeedKMPH': 60
+    }
+
+def stubSunny():
+    return {
+        'temperatureInC': 20,
+        'precipitation': 0,
+        'humidity': 30,
+        'windSpeedKMPH': 10
+    }
+
+def stubPartlyCloudy():
+    return {
+        'temperatureInC': 30,
+        'precipitation': 30,
+        'humidity': 50,
+        'windSpeedKMPH': 20
+    }
+
 def testRainy():
-    weather = report(sensorStub)
-    print(weather)
-    assert("rain" in weather)
+    weather = report(stubRainy)
+    print(f"Rainy test: {weather}")
+    assert("Rainy" in weather)
 
+def testStormy():
+    weather = report(stubStormy)
+    print(f"Stormy test: {weather}")
+    assert("Stormy" in weather)
 
-def testHighPrecipitation():
-    # This instance of stub needs to be different-
-    # to give high precipitation (>60) and low wind-speed (<50)
+def testSunny():
+    weather = report(stubSunny)
+    print(f"Sunny test: {weather}")
+    assert(weather == "Sunny Day")
 
-    weather = report(sensorStub)
-
-    # strengthen the assert to expose the bug
-    # (function returns Sunny day, it should predict rain)
-    assert(len(weather) > 0);
-
+def testPartlyCloudy():
+    weather = report(stubPartlyCloudy)
+    print(f"Partly Cloudy test: {weather}")
+    assert("Partly Cloudy" in weather)
 
 if __name__ == '__main__':
     testRainy()
-    testHighPrecipitation()
-    print("All is well (maybe!)");
+    testStormy()
+    testSunny()
+    testPartlyCloudy()
+    print("All is well (maybe!)")
